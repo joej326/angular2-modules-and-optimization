@@ -4,7 +4,6 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 
 import { AppComponent } from './app.component';
-import { HeaderComponent } from './header/header.component';
 import { ShoppingListComponent } from './shopping-list/shopping-list.component';
 import { ShoppingEditComponent } from './shopping-list/shopping-edit/shopping-edit.component';
 import { DropdownDirective } from './shared/dropdown.directive';
@@ -17,27 +16,45 @@ import { SigninComponent } from './auth/signin/signin.component';
 import { AuthService } from './auth/auth.service';
 import { AuthGuard } from './auth/auth-guard.service';
 import { RecipesModule } from 'app/recipes/recipes.module';
+import { TestDirective } from './test.directive';
+import { SharedModule } from 'app/shared/shared.module';
+import { CoreModule } from 'app/core/core.module';
 
 // a module created by YOU is called a "feature module"
+
+// 3) RecipesModule is imported below. This was the final step.
+
+// RECAP: we made a recipe module for everything recipe-related. 
+// We then made a RecipeModule with recipe related routes which were eported with RouterModule
+// and imported into the RecipeModule.
+// Lastly, we imported the RecipeModule into the main AppModule and we're good to go!
+
+
+//NOTE: in a module's export array, DO NOT export a feature module so that another module
+// can use that feature module. This is a common gotchya.
 
 @NgModule({
   declarations: [
     AppComponent,
-    HeaderComponent,
     ShoppingListComponent,
     ShoppingEditComponent,
-    DropdownDirective,
     SignupComponent,
-    SigninComponent
+    SigninComponent,
+    TestDirective
   ],
   imports: [
     BrowserModule,
     FormsModule,
-    ReactiveFormsModule,
-    HttpModule,
+    ReactiveFormsModule, //RecipesModule was taken out for lazy-loading. Anything that's in the imports is
+    HttpModule,          // eagerly-loaded
     AppRoutingModule,
-    RecipesModule         // inject other modules into the the "imports" array
-  ],
+    CoreModule,
+    //RecipesModule,          inject other modules into the the "imports" array
+    SharedModule           //The whole reason we made a SharedModule is so that we can use our DropdownDirective
+  ],                       // in our AppModule AND our RecipesModule. So we import it here AND in our RecipesModule.
+
+
+                //OPTIONAL: We can move ALL of the providers into our core module
   providers: [ShoppingListService, RecipeService, DataStorageService, AuthService, AuthGuard],
   bootstrap: [AppComponent]
 })

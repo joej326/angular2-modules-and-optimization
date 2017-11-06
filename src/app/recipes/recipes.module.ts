@@ -9,13 +9,17 @@ import { RecipeDetailComponent } from 'app/recipes/recipe-detail/recipe-detail.c
 import { RecipeItemComponent } from 'app/recipes/recipe-list/recipe-item/recipe-item.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { RecipesRoutingModule } from 'app/recipes/recipes-routing.module';
+import { SharedModule } from 'app/shared/shared.module';
 
+
+// 2) RECIPE MODULE HANDLES EVERYTHING RECIPE-RELATED, SO THE RECIPE ROUTING MODULE IS IMPORTED
 
 @NgModule({
   imports: [
     CommonModule,
     ReactiveFormsModule,
-    RecipesRoutingModule
+    RecipesRoutingModule,
+    SharedModule
   ],
   declarations: [
     RecipesComponent,

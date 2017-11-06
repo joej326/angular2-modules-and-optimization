@@ -8,9 +8,11 @@ import { AuthGuard } from 'app/auth/auth-guard.service';
 import { RecipeDetailComponent } from 'app/recipes/recipe-detail/recipe-detail.component';
 
 
+// 1) WE HAVE THE RECIPE ROUTES
+
 const recipesRoutes: Routes = [
-  { path: 'recipes', component: RecipesComponent, children: [
-    { path: '', component: RecipeStartComponent },
+  { path: '', component: RecipesComponent, children: [ //NOTE: we changed '/recipes' to an empty string b/c we already
+    { path: '', component: RecipeStartComponent },     // defined '/recipes' in our AppRoutingModule
     { path: 'new', component: RecipeEditComponent, canActivate: [AuthGuard] },
     { path: ':id', component: RecipeDetailComponent },
     { path: ':id/edit', component: RecipeEditComponent, canActivate: [AuthGuard] },
