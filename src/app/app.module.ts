@@ -33,6 +33,9 @@ import { CoreModule } from 'app/core/core.module';
 //NOTE: in a module's export array, DO NOT export a feature module so that another module
 // can use that feature module. This is a common gotchya.
 
+//NOTE: when using lazy loading, you NEED to have a .forChild in that lazy-loaded module,
+// or have have that module's routing module (eg. RecipeRoutingModule) imported into it
+
 @NgModule({
   declarations: [
     AppComponent,
