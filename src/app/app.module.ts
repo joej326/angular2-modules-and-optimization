@@ -36,6 +36,16 @@ import { CoreModule } from 'app/core/core.module';
 //NOTE: when using lazy loading, you NEED to have a .forChild in that lazy-loaded module,
 // or have have that module's routing module (eg. RecipeRoutingModule) imported into it
 
+// Create a SharedModule with the components, directives, and pipes that you use everywhere in your app. This module should consist entirely of declarations, most of them exported.
+// The SharedModule may re-export other widget modules, such as CommonModule, FormsModule, and modules with the UI controls that you use most widely.
+// The SharedModule should not have providers for reasons explained previously. Nor should any of its imported or re-exported modules have providers. If you deviate from this guideline, know what you're doing and why.
+// Import the SharedModule in your feature modules, both those loaded when the app starts and those you lazy load later.
+// CoreModule
+
+// Create a CoreModule with providers for the singleton services you load when the application starts.
+// Import CoreModule in the root AppModule only. Never import CoreModule in any other module.
+// Consider making CoreModule a pure services module with no declarations.
+
 @NgModule({
   declarations: [
     AppComponent,
